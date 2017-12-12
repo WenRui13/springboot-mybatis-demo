@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+
+<!--http://www.mybatis.org/generator/configreference/xmlconfig.html#-->
+<generatorConfiguration>
+
+    <properties resource="application.properties"/>
+
+    <classPathEntry location="D:\repo\mysql\mysql-connector-java\5.1.44\mysql-connector-java-5.1.44.jar"/>
+
+    <context id="MySqlTables" targetRuntime="MyBatis3">
+
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="${spring.datasource.driverClassName}"
+                        connectionURL="${spring.datasource.url}"
+                        userId="${spring.datasource.username}"
+                        password="${spring.datasource.password}">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="com.example.demo.entity" targetProject="src\main\java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mybatis.mapper" targetProject="src\main\resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.example.demo.mapper" targetProject="src\main\java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <table schema="pop_qa" tableName="users" domainObjectName="User"
+               enableCountByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false"
+               selectByExampleQueryId="false"
+               enableSelectByPrimaryKey="false"
+               enableUpdateByPrimaryKey="false"
+               enableDeleteByPrimaryKey="false"
+               selectByPrimaryKeyQueryId="false"
+               enableDeleteByExample="false">
+            <property name="useActualColumnNames" value="true"/>
+            <!--<generatedKey column="ID" sqlStatement="DB2" identity="true"/>-->
+            <!--<columnOverride column="DATE_FIELD" property="startDate"/>-->
+            <ignoreColumn column="FRED"/>
+            <columnOverride column="user_sex" javaType="com.example.demo.enums.UserSexEnum"/>
+        </table>
+
+    </context>
+</generatorConfiguration>
